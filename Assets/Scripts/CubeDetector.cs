@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class CubeDetector : MonoBehaviour
 {
-
     [SerializeField] private float _rayLength = 10f;
+
+    public event UnityAction<Cube> CubeDetected;
 
     private Ray _ray;
     private int _leftMouseId;
@@ -24,9 +26,9 @@ public class CubeDetector : MonoBehaviour
 
             foreach (RaycastHit hit in _hits)
             {
-                if (hit.collider.TryGetComponent<Destroyer>(out Destroyer destroyer))
+                if (hit.collider.TryGetComponent<Cube>(out Cube cube))
                 {
-                    destroyer.Explode();
+                    CubeDetected?.Invoke(cube);
 
                     break;
                 }
