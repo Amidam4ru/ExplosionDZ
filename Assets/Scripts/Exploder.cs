@@ -17,7 +17,7 @@ public class Exploder : MonoBehaviour
         }
     }
 
-    public void BlowUpEnvironment(Vector3 position)
+    public void BlowUpEnvironment(Vector3 position, float radius, float force)
     {
         Collider[] cubes = Physics.OverlapSphere(position, _radius);
 
@@ -25,7 +25,7 @@ public class Exploder : MonoBehaviour
         {
             if (cube.gameObject.TryGetComponent(out Rigidbody rigidbody))
             {
-                rigidbody.AddExplosionForce(_force, position, _radius);
+                rigidbody.AddExplosionForce(force, position, radius);
             }
         }
     }

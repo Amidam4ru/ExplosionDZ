@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
         _newCubes = new List<Cube>();
     }
 
-    public void CreateCubes(int explosionChance, Vector3 position, float size)
+    public void CreateCubes(int explosionChance, Vector3 position, float size, float explosionForce, float explotionRadius)
     {
         _newCubes.Clear();
         int cubesNumber = Random.Range(minCubeNumber, maxCubeNumber + 1);
@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < cubesNumber; i++)
         {
             Cube cube = Instantiate(_cubePrefab, position, Quaternion.identity);
-            cube.Initialized(explosionChance, size);
+            cube.Initialized(explosionChance, size, explosionForce, explotionRadius);
             _newCubes.Add(cube);
         }
     }
