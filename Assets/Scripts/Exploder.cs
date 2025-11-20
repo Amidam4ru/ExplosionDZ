@@ -16,4 +16,17 @@ public class Exploder : MonoBehaviour
             }
         }
     }
+
+    public void BlowUpEnvironment(Vector3 position)
+    {
+        Collider[] cubes = Physics.OverlapSphere(position, _radius);
+
+        foreach (Collider cube in cubes)
+        {
+            if (cube.gameObject.TryGetComponent(out Rigidbody rigidbody))
+            {
+                rigidbody.AddExplosionForce(_force, position, _radius);
+            }
+        }
+    }
 }

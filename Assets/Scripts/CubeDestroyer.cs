@@ -5,6 +5,7 @@ public class CubeDestroyer : MonoBehaviour
     [SerializeField] private CubeDetector _cubeDetector;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private Exploder _exploder;
+    
 
     private int _degreeExplosionReduction;
     private int _degreeSize;
@@ -34,6 +35,10 @@ public class CubeDestroyer : MonoBehaviour
         {
             _spawner.CreateCubes(cube.ExplosionChancePercent / _degreeExplosionReduction, cube.transform.position, cube.transform.localScale.x / _degreeSize);
             _exploder.BlowUp(cube.gameObject.transform.position, _spawner.NewCubes);
+        }
+        else
+        {
+            _exploder.BlowUpEnvironment(cube.transform.position);
         }
 
         Destroy(cube.gameObject);
